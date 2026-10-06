@@ -1,0 +1,11 @@
+import { rest } from "./sb.mjs";
+const team = process.argv[2] || "8623e7d1-7afa-44cd-b253-f40ff269d656";
+const m = await rest(`team_memberships?select=statut,created_at,player_profiles(id,prenom,nom,user_id,date_naissance,photo_url)&team_id=eq.${team}`);
+const actifs = m.filter((x) => x.statut === "active");
+console.log("inscrits :", actifs.length, "| fiches rattachées à un compte :", actifs.filter((x) => x.player_profiles?.user_id).length, "| avec date de naissance :", actifs.filter((x) => x.player_profiles?.date_naissance).length);
+const sansPhoto = actifs.filter((x) => !x.player_profiles?.photo_url).map((x) => `${x.player_profiles?.prenom} ${x.player_profiles?.nom}`);
+console.log("fiches sans photo (doublons possibles) :", sansPhoto.length ? sansPhoto.join(", ") : "aucune");
+const r = await rest(`membership_requests?select=*&team_id=eq.${team}&order=created_at.desc&limit=20`);
+console.log("demandes d'entrée :", Array.isArray(r) ? r.map((x) => `${x.prenom ?? x.first_name ?? ""} ${x.nom ?? x.last_name ?? ""} (${x.status ?? x.statut}, ${String(x.created_at).slice(11, 16)})`).join(" ; ") || "aucune" : JSON.stringify(r).slice(0, 200));
+const ids = actifs.map((x) => x.player_profiles.id);
+const c = await rest(`consentements_biometrie?select=player_id&statut=eq.accorde&player_id=in.(${ids.join(",")})`); console.log("accords de reconnaissance :", c.length);
