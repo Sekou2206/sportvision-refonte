@@ -1,0 +1,107 @@
+# Workspace History
+
+> Journal chronologique de toutes les sessions et décisions importantes.
+> Le plus récent en haut. Mis à jour automatiquement par Claude.
+>
+> **Comment ça marche :** Quand je lance la commande `/update` après une session importante, ou quand je raconte un changement significatif, Claude ajoute une entrée ici automatiquement. Je n'ai pas à écrire ce fichier manuellement.
+
+---
+
+## 2026-09-11
+
+### Finance du Responsable Production ; chasse aux petits défauts OS et Club+
+
+- Module Finance du Responsable Production (v148 à v150) : quatre blocs séparés (terrain, coordination, prime ventes, frais), fixe tiré du barème de pôle existant, prime ventes sur le CA encaissé HT net de remboursements par familles cochées, statuts prévisionnel, acquis (livraison validée), validé, transmis compta, payé. Écrans « Mes finances » (Production) et « Finance Production » (Admin, compta, Secrétariat)
+- Principe tranché par Fouka : il peut s'affecter lui-même, mais sa rémunération vient de la grille ; tout autre montant part en validation Admin, et il ne valide, ne transmet ni ne règle jamais ses propres montants ni ses frais
+- Trois trous fermés à l'audit : le montant recommandé venait du navigateur (falsifiable), la Production pouvait valider sa propre rémunération et ses propres notes de frais
+- Aucun taux inventé : coordination et prime ventes restent à 0 € tant que Fouka ne les a pas réglés ; Christian n'a pas encore de niveau opérateur
+- Chasse aux défauts sur 212 écrans : fil d'activité qui exposait les rémunérations et la finance au commercial et à la Production de tous les pôles (v144), accueil CM qui ne montrait jamais les prestations à venir (v146), coéquipiers invisibles des opérateurs (v143), compteurs de présences et de résultats incohérents (v142, v145, v147), plus une dizaine de petits défauts d'affichage
+- Club+ : le Centre communication devient le planning éditorial du CM (v141), testé de bout en bout sur Villemomble ; une mission regroupée compte pour une seule présence
+
+---
+
+## 2026-09-10
+
+### Circuit mission, rémunération et rentabilité figé ; recrutement cloisonné
+
+- Une présence SportVision décidée par le CM crée aussitôt une mission chez le Responsable Production du pôle (v126), qui choisit l'opérateur et fixe la « Rémunération mission » (jamais « salaire »)
+- Rémunération (v127) : la grille donne un montant recommandé ; au-delà de ±15 % d'écart, un motif est obligatoire, sans validation Admin. Après acceptation par l'opérateur, une hausse est possible (il est prévenu), une baisse devient une nouvelle proposition à ré-accepter. Tout changement est historisé (montant, auteur, rôle, motif)
+- Trois notions séparées : prix client (Secrétariat, Admin), coût production, rémunération opérateur. La Production voit le prix vendu sans pouvoir le modifier ; le Secrétariat ne modifie plus les rémunérations ; le CM et les photographes ne voient ni prix ni marge
+- Frontière de la Production (v129) : prix client en lecture, rémunérations, déplacements, coûts et marge, uniquement dans son pôle. Jamais la paie globale, les coordonnées bancaires, les coûts RH hors mission ni le barème des responsables de pôle
+- Rentabilité mensuelle par club (v128), sur l'accueil Production et la fiche club. Marge négative ou faible (moins de 20 % du prix vendu) : une alerte, jamais un blocage. Une mission à perte reste affectable et payable (partenariat, événement, urgence, relation club)
+- Recrutement (v130, P1 confidentialité) : les 37 candidatures, leurs CV et l'e-mail de refus étaient ouverts à tout le staff, photographes et CM compris. Désormais l'Admin voit tout ; la Production et le responsable de pôle voient les candidatures d'opérateurs terrain de leur pôle ; le Secrétariat, à partir de « retenu » ; CM, photographes, commerciaux et comptabilité n'y ont plus accès. Contrat, banque et dossier RH restent à l'Admin et au Secrétariat
+- Circuit gelé, en observation réelle : le seuil de 15 % se réévaluera sur la distribution réelle des écarts, pas avant. Le prochain retour utile doit venir d'une vraie mission rémunérée traitée de A à Z par le Responsable Production
+
+---
+
+## 2026-08-31
+
+### Cloisonnement SportVision / Eloria Digital
+
+- Constat : Fouka dirige deux activités distinctes, SportVision et **Eloria Digital** (son agence de communication), et les deux commençaient à se mélanger dans les sessions et dans la mémoire persistante de Claude
+- Confirmé par Fouka : les deux activités sont exploitées par la même société, la SASU **Elkana Group**. Seul le nom commercial affiché change selon l'activité
+- Architecture retenue, à trois niveaux : un `~/.claude/CLAUDE.md` **global** (identité de Fouka, style de communication, identité légale Elkana Group, règle de cloisonnement), chargé dans toutes les sessions, plus **un workspace par activité** avec son CLAUDE.md purement métier
+- Raison technique du choix : la mémoire persistante de Claude est indexée par chemin de dossier, donc deux dossiers distincts donnent une isolation totale sans effort. Les 42 mémoires SportVision restent attachées à ce workspace et ne fuiteront jamais côté Eloria
+- Workspace Eloria créé dans `~/Documents/jarvis-eloria/` (contexte, livrables, commandes `/prime` `/update` `/morning` `/commit`, skill de veille, dépôt Git initialisé)
+- `CLAUDE.md` de ce workspace réécrit : allégé de tout ce qui remonte au global, recentré sur SportVision, structure mise à jour pour refléter les dossiers réels de `livrables/`. La règle "Eloria n'a rien à faire ici" y est explicite
+- Reste à faire côté Eloria : remplir `context/CONTEXT.md`, encore à l'état de squelette, à partir des documents existants (`~/Documents/Eloria/`, plaquette, playbook ADN, contrats Mr Boms, offre Air Denizot, projet Les Milles)
+
+---
+
+## 2026-08-15
+
+### SportVision Connect (personnel) entièrement construit + feuille de route écosystème fixée
+
+- Chantier massif sur 2 jours (14-15/08) : Espace joueur (Accueil, Affiliations, Équipes, Cotisations, Prestations, Commandes, Factures, Contenus, Calendrier, Messages, Profil, Accès) et Espace particulier (Mes sportifs, réservation/cotisation pour un sportif, listes multi-sportifs) entièrement construits par vagues d'agents en parallèle, revus et fusionnés
+- Ajouts transverses : navigation consolidée sur les deux espaces, topbar avec recherche globale et notifications réelles, vue Cotisations ajoutée côté SportVision OS (angle mort corrigé), lien Connect↔OS et systèmes de paiement Stripe audités (aucun bug de sécurité trouvé)
+- Décisions produit encore en attente, volontairement non tranchées par Claude : politique de remboursement des cotisations, vérification légale pour un "profil géré" avant mineurs réels, lien cotisation↔prestation précise
+- Reste technique en suspens : domaine `connect.sportvision-an.fr` pas encore branché sur le nouveau site Netlify
+- Feuille de route fixée : tester Connect en conditions réelles → peaufiner → reprendre Club+ → applications mobiles
+
+---
+
+## 2026-08-07
+
+### Retrait du Portail exécuté (pas juste décidé)
+
+- Les 3 priorités actées le 2026-08-06 sont closes : backlog de sécurité Connect corrigé, recette fonctionnelle complète de l'espace Projet faite, icônes PWA et edge function `org-invite` déployées et vérifiées
+- Rédaction (par Claude, non relue par un juriste à ce jour) des 6 textes de conditions particulières manquants dans la Banque de contrats (Coach/Académie, Événement, Joueur, Sponsoring, Contrat pilote, Autre), sur le même modèle que les 3 textes déjà fournis par le fondateur
+- Bascule effective des e-mails automatiques (bienvenue, reçu de paiement) et de l'app Club+ : ce qui pointait encore vers le Portail pointe maintenant vers Connect
+- Connect complété avec les deux capacités qui lui manquaient encore par rapport au Portail : mot de passe oublié, suppression de compte
+- Suppression définitive du dossier `SportVision-Portail` (site) et `SportVision-Portail-App` (app mobile iOS/Android) du repo — aucun client n'a jamais utilisé ces deux produits, tout était en phase de test. Les migrations SQL historiques `migration-portail-v*.sql` sont conservées : elles décrivent le schéma DB (clients, devis...) toujours utilisé par Connect
+- Reste un point cosmétique non bloquant : quelques commentaires dans la vitrine et les `netlify.toml` mentionnent encore "le Portail" pour expliquer une fonction technique partagée (`create-guest-request`) — aucun lien cassé, juste du texte à rafraîchir un jour
+
+---
+
+## 2026-08-06
+
+### Décision stratégique : retrait du Portail au profit de SportVision Connect
+
+- Le Portail (espace client historique) sera abandonné comme produit séparé. Tout le suivi client (devis, contrats, factures, livrables, messagerie, RDV) doit à terme se passer sur SportVision Connect, un chantier de refonte déjà entamé dans une session précédente (coque commune + espaces Club/Coach/Académie/Projet/Sponsor/Joueur/Famille), mais qui n'avait jamais été testé avec de vrais utilisateurs ni de vraies données
+- Bascule progressive décidée, mais avec une marge de manœuvre large : aucun client réel n'est encore sur le Portail à ce jour, tout était en phase de test, donc l'architecture peut encore être librement modifiée sans risque de casser un accès client existant
+- Priorités actées avant tout onboarding réel de clients sur Connect : (1) corriger le backlog de sécurité déjà documenté côté Connect (colonnes non protégées sur sponsors/newsroom, 11 occurrences), (2) recette fonctionnelle complète de l'espace "Projet" (le module qui remplace le Portail), (3) finaliser les éléments techniques manquants (icônes PWA, déploiement de l'edge function `org-invite`)
+- Le site vitrine public (`livrables/SportVision/`, catalogue/offres, sans compte) n'est pas concerné par ce changement, il reste séparé de la zone authentifiée
+
+---
+
+## 2026-08-03
+
+### Lancement officiel de SportVision Portail fixé à mi-septembre 2026
+
+- Le Portail (site public + espace client) est en développement avancé : catalogue, paiements Stripe, messagerie, signature électronique (Youtrust) et facturation électronique conforme (Pennylane) déjà intégrés et déployés
+- L'app mobile (iOS/Android) et l'achat du domaine personnalisé (`portail.sportvision.fr`) sont volontairement repoussés à fin août, pour arriver prêts pile pour le lancement de mi-septembre plutôt que d'être faits dans la précipitation maintenant
+
+---
+
+## 2026-06-27
+
+### Installation initiale du Jarvis
+
+- Workspace personnalisé pour Fouka, basé à Villeneuve-la-Guyard
+- Profil principal : Entrepreneur
+- Activité : SportVision, captation vidéo/photo d'événements sportifs et création de contenus, avec développement de SportVision TV en cours
+- Objectifs court terme identifiés : signer 5 clubs partenaires, automatiser l'écosystème SportVision
+- Vision long terme : devenir la référence du sport amateur en France, lancer SportVision TV nationalement, activité en autonomie
+- Projets actifs au démarrage : structuration et automatisation de l'écosystème SportVision, amélioration du modèle économique, développement clients, communication
+- Domaines d'aide prioritaires : stratégie business, communication professionnelle, développement et organisation
+- Style de communication choisi : mélange selon le contexte
